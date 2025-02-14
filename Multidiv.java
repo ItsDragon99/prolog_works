@@ -9,6 +9,7 @@ public class Multidiv {
         int b = sc.nextInt();
         System.out.println("La multiplicacion de " + a + " * " + b + " es: " + multi(a, b));
         System.out.println("La division de " + a + " / " + b + " es: " + div(a, b));
+        sc.close();
     }
 
     public static int multi(int a, int b) {
