@@ -21,3 +21,9 @@
 (concatenate 'string "Hola, " "mundo!") ; Junta estas cadenas en una sola => "Hola, mundo!"
 (string-length "Lisp") ; Te dice cuántas letras tiene esta cadena => 4
 (reduce #'+ (append '(1 2 3) '(4 5 6))) ; Junta las listas y suma todo => 21
+(defun es-par (n)
+    "Devuelve t si n es un número par, nil en caso contrario."
+    (zerop (mod n 2)))
+
+(es-par 4) ; => t
+(es-par 5) ; => nil
