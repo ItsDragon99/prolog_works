@@ -18,6 +18,47 @@
     )
 )
 
+(defun salary-with-when (age)
+  (when (> age 10)
+    (princ (* *final-salary* 1.1)))
+
+  (when (and (<= age 10) (> age 5))
+    (princ (* *final-salary* 1.07)))
+
+  (when (and (<= age 5) (> age 3))
+    (princ (* *final-salary* 1.05)))
+
+  (when (<= age 3)
+    (princ (* *final-salary* 1.03)))
+)
+
+(defun salary-with-unless (age)
+  (unless (< age 10)
+    (princ (* *final-salary* 1.1))
+    (return-from salary-with-unless 'done))   
+
+  (unless (and (< age 10) (< age 5))
+    (princ (* *final-salary* 1.07))
+    (return-from salary-with-unless 'done))   
+
+  (unless (and (< age 5) (< age 3))
+    (princ (* *final-salary* 1.05))
+    (return-from salary-with-unless 'done))   
+
+  (unless (> age 3)
+    (princ (* *final-salary* 1.03))
+    (return-from salary-with-unless 'done))   
+)
+
+(defun salary-with-case (age)
+    (case t
+        ((> age 10) (* *final-salary* 1.1))
+        ((and (< age 10) (> age 5)) (* *final-salary* 1.07))
+        ((and (< age 5) (> age 3)) (* *final-salary* 1.05))
+        (t (* *final-salary* 1.03)))
+)
+
+
 ; 2.- Hacer un algortimo que tome el peso en libras de una cantidad de
 ; ropa a lavar en una lavadora y nos devuelva el nivel dependiendo del
 ; peso; además nos informe la cantidad de litros de agua que
@@ -28,11 +69,70 @@
 
 (defun wash(pounds)
     (cond ((> pounds 30) "Lavadora no funcionara")
-           ((> pounds 22) "máximo")
+           ((> pounds 22) "maximo")
            ((> pounds 15) "alto")
            ((> pounds 8) "medio")
+              (t "minimo")
     )
  )
+
+ (defun wash-with-when (pounds)
+    (when (> pounds 30)
+      (princ "Lavadora no funcionara"))
+
+    (when (> pounds 22)
+      (princ "maximo"))
+
+    (when (> pounds 15)
+      (princ "alto"))
+
+    (when (> pounds 8)
+      (princ "medio"))
+
+    (when (< pounds 8)
+      (princ "minimo"))
+ )
+
+
+ (defun wash-with-unless (pounds)
+    (unless (< pounds 30)
+      (princ "Lavadora no funcionara")
+      (return-from wash-with-unless 'done))
+
+    (unless (< pounds 22)
+      (princ "maximo")
+      (return-from wash-with-unless 'done))
+
+    (unless (< pounds 15)
+      (princ "alto")
+      (return-from wash-with-unless 'done))
+
+    (unless (< pounds 8)
+      (princ "medio")
+      (return-from wash-with-unless 'done))
+
+    (unless (> pounds 8)
+      (princ "minimo")
+      (return-from wash-with-unless 'done))
+ )
+
+
+(defun wash-with-case (pounds)
+  (let ((condicion_rango
+         (cond ((> pounds 30) 'nowork)
+               ((>= pounds 22) 'max)
+               ((>= pounds 15) 'alto)
+               ((>= pounds 8) 'medio)
+               (t 'min))))
+    (case condicion_rango
+      (nowork (princ "Lavadora no funcionará"))
+      (max (princ "Máximo"))
+      (alto (princ "Alto"))
+      (medio (princ "Medio"))
+      (min (princ "Mínimo")))))
+
+
+
 
 ; 3.- Martha va a realizar su fiesta de quince años. Por lo cual ha
 ; invitado a una gran cantidad de personas. Pero también ha decidido
@@ -49,3 +149,33 @@
           (t "No entran")
     )
 )
+(defun party-with-when (age)
+
+    (when (> age 15)
+      (princ "con regalos"))
+
+    (when (= age 15)
+      (princ "entran gratis"))
+
+    (when (< age 15)
+      (princ "No entran"))
+)   
+(defun party-with-unless (age)
+    (unless (<= age 15)
+        (princ "con regalos")
+        (return-from party-with-unless 'done))
+
+    (unless (/= age 15)
+        (princ "entran gratis")
+        (return-from party-with-unless 'done))
+
+    (unless (>= age 15)
+        (princ "No entran")
+        (return-from party-with-unless 'done))
+)
+
+(defun party-with-case (age)
+  (case t
+    ((> age 15) (princ "con regalos"))
+    ((= age 15) (princ "entran gratis"))
+    ((< age 15) (princ "No entran"))))
