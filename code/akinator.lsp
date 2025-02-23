@@ -1,109 +1,123 @@
 (defparameter *nodos* 
   '(
-      (humanos
-        (sanchez-familia
-          (dimension-c137
-            (cientifico-loco (alcoholico (rick-sanchez)))
-            (nieto (compañero-de-rick (morty-smith)))
-          )
-          (hermana (aventurera (summer-smith)))
-          (madre (cirujana-de-caballos (beth-smith)))
-          (padre (desempleado (jerry-smith)))
+    (humanos
+      (sanchez-familia
+        (dimension-c137
+          (cientifico-loco (rick-sanchez morty-smith))
+          (nietos-rick-sanchez (morty-smith summer-smith))
         )
-        (escuadron-vindicators
-          (lider (controla-energia (supernova)))
-          (hormiga-reina (million-ants))
-          (mitad-cocodrilo (mitad-robot (crocubot)))
-        )
-        (ciudadanos-de-la-tierra
-          (profesor (adicto-a-los-sueños (mr-goldenfold)))
-          (director-escuela (principal-vagina))
-          (abuela-de-morty (abuelita-smith))
+        (padres 
+          (madre (beth-smith beth-esposa))
+          (padre (jerry-smith jerry-esposo))
         )
       )
-      (extraterrestres
-        (federacion-galactica
-          (amigo-de-rick
-            (resistencia (birdperson))
-            (squanchador (squanchiano (squanchy)))
-          )
-          (asesino-a-sueldo (krombopulos-michael))
-          (agente-encubierta (tammy-guetermann))
-        )
-        (planeta-gazorpazorp
-          (gato-salvaje (odia-a-los-lunes (gazorpazorpfield)))
-          (lider-suprema (reina-gazorpiana))
-        )
-        (habitantes-del-microverso
-          (cientifico (rival-de-rick (zeep-xanflorp)))
-          (habitante (esclavo-energético (habitante-random)))
-        )
+      (escuadron-vindicators
+        (lider (supernova million-ants))
+        (cocodrilo-robot (crocubot robo-crocubot))
       )
-      (robots
-        (creaciones-de-rick
-          (experimento-fallido (abradolf-lincler))
-          (ayudante (meeseeks))
-          (sirviente (robo-butler))
-        )
-        (robots-independientes
-          (controlado-por-unity (unity-drone))
-          (aficionado-al-gear-wars (gearhead))
-        )
-        (exterminadores
-          (programado-para-matar (robo-asesino))
-          (morty-mejorado (cyber-morty))
-        )
+      (ciudadanos-de-la-tierra
+        (profesores (mr-goldenfold principal-vagina))
+        (familia-smith (abuelita-smith abuelo-smith))
       )
-      (dimensiones-alternas
-        (mortys
-          (presidente-del-citadel (evil-morty))
-          (modificado (morty-cyborg))
-          (tonto-pero-bueno (morty-doofus))
-        )
-        (ricks
-          (lider-del-consejo (rick-primer-ministro))
-          (inteligencia-artificial (rick-robot))
-          (rick-normal (rick-simple))
-        )
-        (realidades-extrañas
-          (rick-en-forma-de-pepino (pickle-rick))
-          (lado-malvado-de-rick (toxic-rick))
-          (lado-malvado-de-morty (toxic-morty))
-        )
+    )
+    (extraterrestres
+      (federacion-galactica
+        (rebeldes (birdperson squanchy))
+        (agentes (krombopulos-michael tammy-guetermann))
       )
+      (planeta-gazorpazorp
+        (habitantes (gazorpazorpfield reina-gazorpiana))
+        (sociedad (gazorp-macho gazorp-queen))
+      )
+    )
+    (robots
+      (creaciones-de-rick
+        (experimentos (abradolf-lincler meeseeks))
+        (sirvientes (robo-butler helper-bot))
+      )
+      (robots-independientes
+        (drones (unity-drone autonomo-robot))
+        (guerreros (gearhead robo-soldier))
+      )
+      (exterminadores
+        (asesinos (robo-asesino exterminador-bot))
+        (mejoras (cyber-morty cyber-rick))
+      )
+    )
+    (dimensiones-alternas
+      (mortys
+        (lideres (evil-morty del-morty))
+        (modificados (cyborg-morty mutant-morty))
+      )
+      (ricks
+        (lideres (rick-primer-ministro rick-diplomatico))
+        (normales (rick-simple rick-honesto))
+      )
+      (realidades-extrañas
+        (mutaciones (pickle-rick mustard-rick))
+        (toxicidades (toxic-rick toxic-morty))
+      )
+    )
   )
 )
 
 
 
-(defun akinator (nodos)
-    (if (atom nodos)
+(defun akinator-choose-list(nodos)
+      (princ #\newline)
+      (princ "Tu personaje es: ")
+      (princ (car nodos))
+      (princ "? (si/no): ")
+      (setq resp (read-line))
+      (if (string= resp "si")
+        (akinator (car nodos))
         (progn
-            (princ "Ya se tu personaje padrino, es: ")
-            (princ nodos)
+          (akinator-choose-list (cdr nodos))
         )
-        (progn
-            (princ "Tu personaje es:")
-            (setq path (car (first nodos)))
-            (princ path)
-            
-            (setq resp(read-line))
-            (if (string= resp "si")
-                (progn 
-                    (setq *nuevo_nodo* (cdr (assoc path nodos)) )
-                    (if (equal (cdar *nuevo_nodo*) nil)
-                        (setq *nuevo_nodo* (caar *nuevo_nodo*) ) 
-                    )
-                    (akinator *nuevo_nodo*)
-                )
-                (progn
-                    (setq *nuevo_nodo* (cdr nodos))
-                    (akinator *nuevo_nodo*)
-                )
-            )
-        )
-    )
+      )
 )
+
+(defun akinator-questions (nodos)
+      ; (princ #\newline)
+      ; (princ nodos)
+      (princ #\newline)
+      (princ "Tu personaje es un?: ")
+      (setq path (car (first nodos)))
+      (princ path)
+      (princ "? (si/no): ")
+      (setq resp (read-line))
+      
+      (if (string= resp "si")
+        (progn
+          (setq *nuevo_nodo* (cdr (assoc path nodos)) )
+          (akinator *nuevo_nodo*)
+        )
+        (progn
+            (setq *nuevo_nodo* (cdr nodos))
+            (akinator *nuevo_nodo*)
+        ) 
+      )
+
+)
+(defun akinator (nodos)
+  (if (atom nodos)
+      (progn
+        (princ "Ya se quien es tu personaje padrino! Tu personaje es: ")
+        (princ nodos)
+      )
+      (progn
+      (if (cdr nodos)   
+       (progn
+          (akinator-questions nodos)
+        )
+        (progn 
+          (akinator-choose-list (car nodos))
+        )
+      )
+  )
+  )
+)
+
         
 
 (defun start-akinator ()
