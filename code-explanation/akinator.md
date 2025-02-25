@@ -1,3 +1,15 @@
+# Ejercicio en clase 
+### Este trabajo es un akiantor el cual nos ayuda a manipular las listas de manera mas rapida y conscisa
+
+Este código es como un "Akinator" que adivina personajes con preguntas de sí/no.
+
+*nodos*: Es como un árbol gigante con personajes. Está dividido en categorías como "humanos", "extraterrestres", "robots", etc. Y dentro de cada categoría, hay personajes como Rick o Morty.
+
+akinator: Esta función va haciendo preguntas sobre los personajes. Si ya sabe cuál es el personaje (cuando llega a un nombre), lo dice. Si no, te pregunta algo como "¿es un humano?" y según tu respuesta, sigue eligiendo la rama correcta hasta adivinarlo.
+
+start-akinator: Solo arranca el juego llamando a akinator con todo el árbol de personajes.
+
+```lisp
 (defparameter *nodos* 
   '(
       (humanos
@@ -111,3 +123,5 @@
 (defun start-akinator ()
   (akinator *nodos*)
 )
+
+```
