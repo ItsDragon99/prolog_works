@@ -76,6 +76,33 @@
 
 
 
+
+(defparameter *nodes*  '((femenino (
+											
+									(fuego(azula))		
+									(tierra(top))		
+									(agua (katara))))
+						 (masculino(
+									(aire (Hola  rayo masculino))		
+									(fuego(Hola  fuego))		
+									(tierra(Hola Tierra))		
+									(agua (poder de agua))))
+						 (ovni(
+							   (aire (alto(junito ovni ())
+
+									  ))		
+							   (fuego(Hola fuego))		
+							   (tierra(Hola Tierra))		
+							   (agua2 (poder de agua)))
+						  )
+						 (aleatorio(
+									(aire (Hola rayo))		
+									(fuego(Hola fuego))		
+									(tierra(Hola Tierra))		
+									(agua (poder de agua)))
+						  )
+						 ))
+
 (defun akinator (nodos)
     (if (atom nodos)
         (progn
@@ -106,8 +133,45 @@
         )
     )
 )
+
+(defun akinator2 (nodos)
+  (when nodos
+    (princ "Nodos:")
+    (princ nodos)
+    (princ #\newLine)
+
+      (if (atom (car nodos))
+        (progn
+          (princ "Tu personaje es: ")
+          (princ (car nodos))
+        )
+        (progn 
+            
+          (let ((elemento (car nodos)))
+            (format t "Tu personaje es ~a?~%" (car elemento))
+            (setq a (read))
+            (if (string-equal a "si")
+                (progn 
+                  (setq b (cadr (assoc (car elemento) nodos)))
+                  (princ "despues del si")
+                  (princ b)
+                  (akinator2 b)
+                )
+                (akinator2 (cdr nodos))
+            )
+          )
+
+        )
         
+    )
+  )
+
+)
 
 (defun start-akinator ()
   (akinator *nodos*)
+)
+
+(defun start-akinator2 ()
+  (akinator2 *nodes*)
 )
