@@ -71,7 +71,9 @@
 ; Escribe una función que devuelva el elemento enésimo de una lista.
 
 (defun implEnList(listEx emo)
-    (if  
+    (if (equal 0 (- emo 1))
+        (car listEx)
+        (implEnList (cdr listEx) (- emo 1))
     )
 )
 
