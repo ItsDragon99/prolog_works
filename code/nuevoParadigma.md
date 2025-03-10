@@ -1,26 +1,38 @@
-### Constante de Individuo  
-- **Ejemplos:** La Tierra, La Luna, el Sol, un cartero, un perro.  
+- La tierra es un planeta
+    - Constante individual, propiedad planeta
+    - `Planeta(tierra) --> p(t)`
+    - 
 
-### Variable de Individuo  
-- Representan elementos genéricos.  
-- **Ejemplo:** x (para cualquier perro), y (para algún planeta).  
+- La luna no es un planeta
+    - Constante individual, Luna no tiene la propiedad de ser un planeta
+    - `~Planeta(luna)`
 
-### ∀ Cuantificador Universal  
-- Se aplica a todos los elementos de un conjunto.  
-- **Ejemplo:** "Todos los perros muerden a algún cartero" → ∀x P(x).  
+- La luna es un satelite
+    - Constante individual, Luna propiedad es ser satelite
+    - `Satelite(Luna)`
 
-### ∃ Cuantificador Existencial  
-- Indica que al menos un elemento cumple la propiedad.  
-- **Ejemplo:** "Algún planeta gira alrededor de la Luna" → ∃x P(x).  
+- La tierra gira alrede del sol
+    - Constante individual Tierra y Sol
+    - `Gira_alrededor(Tierra, Sol)`
 
-### Propiedad  
-- Característica atribuida a un individuo.  
-- **Ejemplo:** "Ser un satélite" en "La Luna es un satélite".  
+- Todo planeta es un satelite
+    - `AxP(x)^S(x)`
 
-### Relación  
-- Vínculo entre dos o más entidades.  
-- **Ejemplo:** "Muerden" en "Todos los perros muerden a algún cartero".  
+- Todo planeta gira alrededor del sol
+    - `AxP(x) ->  Gira_alrededor(X)`
 
-### Dominio del Discurso  
-- Conjunto de entidades consideradas.  
-- **Ejemplo:** Planetas, satélites, perros, carteros.  
+- Algún planeta gira alrededor de la luna
+    - `Ex (Planeta(x) ∧ Gira_alrededor(x, Luna))`
+
+- Hay por lo menos un satelite
+    - `Ex (Satelite(x))`
+
+- Todos los perros del vecindario muerden algun cartero
+    - `AxP(X)->E(y)^m(X ,Y)`
+
+- Hay un perro que muerde a todos los perrros que muerden a algun cartero
+    -
+
+- Hay un solo perro que se muerde a sí mismo
+    -
+    
