@@ -13,4 +13,24 @@
 ;; cuantos viajen se necesitan
 
 
+(defun cruzar-puente ()
+    (let ((personas '((A 1) (B 2) (C 5) (D 10)))
+                (tiempo-total 0))
+        (labels ((cruzar (izquierda derecha linterna)
+                             (if (null izquierda)
+                                     tiempo-total
+                                     (let ((mejor-tiempo 1000))
+                                         (dolist (p1 izquierda)
+                                             (dolist (p2 (remove p1 izquierda))
+                                                 (let* ((tiempo (max (second p1) (second p2)))
+                                                                (nueva-izquierda (remove p2 (remove p1 izquierda)))
+                                                                (nueva-derecha (cons p1 (cons p2 derecha))))
+                                                     (if (<= (+ tiempo-total tiempo) 17)
+                                                             (let ((tiempo-retorno (cruzar nueva-izquierda nueva-derecha (not linterna))))
+                                                                 (when (< tiempo-retorno mejor-tiempo)
+                                                                     (setf mejor-tiempo tiempo-retorno)))))))
+                                         mejor-tiempo))))
+            (cruzar personas nil t))))
+
+(format t "El tiempo mínimo para cruzar el puente es: ~d minutos~%" (cruzar-puente))
 
