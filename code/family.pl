@@ -44,28 +44,43 @@ madre(carmen, laura).
 madre(paula, monica).
 madre(elena, eduardo).
 
-padre_de(X, Y) :- padre(X, Y).
-madre_de(X, Y) :- madre(X, Y).
+padrede(juan, maria).
+padrede(luis, luisa).
+padrede(carlos, ana).
+padrede(fernando, sofia).
+padrede(raul, carmen).
+padrede(pedro, paula).
 
-hijo_de(X, Y) :- padre(Y, X); madre(Y, X).
-hija_de(X, Y) :- mujer(X), hijo_de(X, Y).
+madrede(maria, juan).
+madrede(luisa, luis).
+madrede(ana, carlos).
+madrede(sofia, fernando).
+madrede(carmen, raul).
+madrede(paula, pedro).
 
-hermano_de(X, Y) :- padre(Z, X), padre(Z, Y), madre(W, X), madre(W, Y), X \= Y.
+#Abuelo
+abuelode(X, Y) :- padre(X, W), padre(W, Y).
 
-abuelo_de(X, Y) :- padre(X, Z), padre(Z, Y).
-abuelo_de(X, Y) :- padre(X, Z), madre(Z, Y).
-abuela_de(X, Y) :- madre(X, Z), padre(Z, Y).
-abuela_de(X, Y) :- madre(X, Z), madre(Z, Y).
+#Abuela
+abuelade(X, Y) :- madre(X, W), madre(W, Y).
+#Nieto
+nietode(X, Y) :- abuelode(Y, X).
+#Nieta
+nietade(X, Y) :- abuelade(Y, X).
+#Hermano
+hermanode(X, Y) :- padre(Z, X), padre(Z, Y);
+#Hermana
+hermande(X, Y) :- madre(Z, X), madre(Z, Y);
+#Tio
+tiode(X, Y) :- hermanode(X, Z), padre(Z, Y);.
+#Tia
+tiade(X, Y) :- hermanode(X, Z), madre(Z, Y).
+#Primo
+primode(X, Y) :- padre(Z, X), padre(W, Y), hermanode(Z, W).
+#Prima
+primode(X, Y) :- padre(Z, X), padre(W, Y), hermande(Z, W).
+#Sobrino
+sobrinode(X, Y) :- tiode(Y, X).
+#Sobrina
+sobrinade(X, Y) :- tiade(Y, X).
 
-nieto_de(X, Y) :- hombre(X), abuelo_de(Y, X).
-nieto_de(X, Y) :- hombre(X), abuela_de(Y, X).
-nieta_de(X, Y) :- mujer(X), abuelo_de(Y, X).
-nieta_de(X, Y) :- mujer(X), abuela_de(Y, X).
-
-tio_de(X, Y) :- hermano_de(X, Z), padre(Z, Y).
-tio_de(X, Y) :- hermano_de(X, Z), madre(Z, Y).
-tia_de(X, Y) :- mujer(X), tio_de(X, Y).
-
-primo_de(X, Y) :- padre(Z, X), hermano_de(Z, W), padre(W, Y).
-primo_de(X, Y) :- madre(Z, X), hermano_de(Z, W), madre(W, Y).
-prima_de(X, Y) :- mujer(X), primo_de(X, Y).
