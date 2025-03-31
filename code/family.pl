@@ -60,7 +60,6 @@ madrede(paula, pedro).
 
 #Abuelo
 abuelode(X, Y) :- padre(X, W), padre(W, Y).
-
 #Abuela
 abuelade(X, Y) :- madre(X, W), madre(W, Y).
 #Nieto
