@@ -45,4 +45,48 @@ append([H|T], L, [H|R]) :-
 ?- append([1,2], [3,4], R).
 
 % 6 Encontrar elemenetos unicos en una lista
-?- findall()
+
+duplicados([], []).
+duplicados([H|T], [H|R]) :-
+    \+ member(H, T),
+    duplicados(T, R).
+duplicados([H|T], R) :-
+    member(H, T),
+    duplicados(T, R).
+
+?- duplicados([1,3, 2, 2, 3, 3, 3, 4], Resultado).
+
+
+% 7. Calcular la potencia de un número
+potencia(X, N, R) :-
+    N >= 0,
+    findall(X, between(1, N, _), L),
+    foldl(multiply, L, 1, R).
+
+multiply(A, B, R) :- R is A * B.
+
+?- potencia(2, 3, Resultado).
+
+% 8. Alinear equipos de un torneo
+equipo_alineacion(Equipos, Alineaciones) :-
+    permutacion(Equipos, Alineaciones).
+
+?- equipo_alineacion([a, b, c], Alineaciones).
+
+% 9. Resolver problemas de caminos
+arco(a, b).
+arco(b, c).
+arco(c, d).
+arco(a, d).
+
+ruta(Inicio, Fin, Camino) :-
+    ruta_recursiva(Inicio, Fin, [Inicio], Camino).
+
+ruta_recursiva(Nodo, Nodo, CaminoActual, CaminoActual).
+
+ruta_recursiva(Inicio, Fin, CaminoActual, Camino) :-
+    arco(Inicio, Siguiente),
+    \+ member(Siguiente, CaminoActual), % Evitar ciclos
+    ruta_recursiva(Siguiente, Fin, [Siguiente|CaminoActual], Camino).
+
+?- findall(Camino, ruta(a, d, Camino), Rutas).
