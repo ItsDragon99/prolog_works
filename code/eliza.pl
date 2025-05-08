@@ -38,12 +38,30 @@ eliza(Input) :-
 	readln(Input1),
 	eliza(Input1), !.
 
+
 template([hola, mi, nombre, es, s(_), '.'], ['Hola', 0, 'Como', estas, tu, '?'], [4]).
 template([buendia, mi, nombre, es, s(_), '.'], ['buen dia', 'Como', estas, tu, 0, '?'], [4]).
 
 template([hola, ',', mi, nombre, es, s(_), '.'], ['Hola', 0, 'Como', estas, tu, '?'], [5]).
 template([buendia, ',', mi, nombre, es, s(_), '.'], ['Buendia', 'Como', estas, tu, 0, '?'], [5]).
 
+template([hola, eliza, te, estoy, saludando, soy, s(_)], ['Hola', 0, 'estoy', 'para', 'ayudarte que ocupas apa', '?'], [6]).
+template([buenas, noches, eliza, soy, s(_)], ['Buenas', 'noches', 0, 'en', 'que', 'puedo', 'ayudarte', '?'], [4]).
+template([buenas, noches, soy, s(_)], ['Hola', 0, 'buenas', 'noches', 'como', 'estas', '?'], [3]).
+template([que, onda, eliza, soy, s(_)], ['Que', 'onda', 0, 'como', 'te', 'puedo', 'ayudar', '?'], [4]).
+template([que, rollo, eliza, soy, s(_)], ['Que', 'rollo', 0, 'en', 'que', 'andas haciendo carnal', '?'], [4]).
+template([wasap, eliza, soy, s(_)], ['Que', 'pasa', 0, 'como', 'te', 'sientes', '?'], [3]).
+template([vamos, a, pistear, eliza, soy, s(_)], ['amos', 0, 'yo', 'pongo', 'un', 'six', 'carnal'], [5]).
+template([hola, eliza, que, onda, soy, s(_)], ['Hola', 0, 'que', 'onda', 'como', 'estas', '?'], [5]).
+template([buenas, noches, eliza, que, tal, soy, s(_)], ['Buenas', 'noches', 0, 'que', 'tal', 'como', 'te', 'va', '?'], [6]).
+template([que, onda, buenas, noches, soy, s(_)], ['Que', 'onda', 0, 'buenas', 'noches', 'como', 'te', 'encuentras', '?'], [5]).
+template([que, rollo, buenas, noches, soy, s(_)], ['Que', 'rollo', 0, 'buenas', 'noches', 'en', 'que', 'te', 'puedo', 'ayudar', '?'], [5]).
+template([hola, eliza, vamos, a, pistear, soy, s(_)], ['Hola', 0, 'mejor', 'platiquemos', 'un', 'rato', 'que', 'te', 'parece', '?'], [5]).
+template([buenas, noches, que, onda, soy, s(_)], ['Buenas', 'noches', 0, 'que', 'onda', 'como', 'te', 'sientes', '?'], [4]).
+template([que, pasa, buenas, noches, soy, s(_)], ['Que', 'pasa', 0, 'buenas', 'noches', 'en', 'que', 'te', 'puedo', 'ayudar', '?'], [5]).
+template([hola, eliza, que, rollo, soy, s(_)], ['Hola', 0, 'que', 'rollo', 'como', 'te', 'va', '?'], [5]).
+
+% Estos son de comodines 
 template([hola, _], ['Hola', 'como', estas, tu, '?'], []).
 template([buendia, _], ['Buendia', 'Como', estas, tu, '?'], []).
 
@@ -78,10 +96,10 @@ elizaLikes(X, R):- \+likes(X), R = ['Nope', i, do, not, like, X].
 likes(apples).
 likes(ponies).
 likes(zombies).
+likes(penes).
 likes(manzanas).
 likes(computadoras).
 like(carros).
-
 
 
 % lo que hace eliza: flagDo
