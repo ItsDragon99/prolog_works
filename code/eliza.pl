@@ -101,21 +101,6 @@ likes(manzanas).
 likes(computadoras).
 like(carros).
 
-sintoma(cancer_prostata, dolor_pelvico).
-sintoma(cancer_prostata, dificultad_orinar).
-sintoma(cancer_prostata, sangre_orina).
-sintoma(bocio, hinchazon_cuello).
-sintoma(bocio, dificultad_respirar).
-sintoma(bocio, ronquera).
-
-region(cancer_prostata, america).
-region(cancer_prostata, europa).
-region(bocio, asia).
-region(bocio, africa).
-
-enfermedad_por_region(Sintoma, Region, Enfermedad) :-
-	sintoma(Enfermedad, Sintoma),
-	region(Enfermedad, Region).
 
 
 % lo que hace eliza: flagDo
