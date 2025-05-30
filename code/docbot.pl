@@ -141,6 +141,23 @@ has_symptom(bocio, ronquera, si).
 
 
 
+medicamento(abiraterona).
+medicamento(enzalutamida).
+medicamento(docetaxel).
+medicamento(prednisona).
+medicamento(levotiroxina).
+medicamento(metimazol).
+medicamento(propiltiouracilo).
+medicamento(beta_bloqueantes).
+
+tratado_con(cancer_prostata, abiraterona).
+tratado_con(cancer_prostata, enzalutamida).
+tratado_con(cancer_prostata, docetaxel).
+tratado_con(cancer_prostata, prednisona).
+tratado_con(bocio, levotiroxina).
+tratado_con(bocio, metimazol).
+tratado_con(bocio, propiltiouracilo).
+tratado_con(bocio, beta_bloqueantes).
 
 persona(juan).
 persona(maria).
@@ -256,6 +273,11 @@ template([donde, es, comun, la, s(_), '?'], [flagRegion], [4]).
 template([en, que, regiones, aparece, s(_), '?'], [flagRegion], [4]).
 
 
+
+template([que, medicamentos, se, usan, para, el, s(_), '?'], [flagMedicamentos], [6]).
+template([que, medicamentos, se, usan, para, la, s(_), '?'], [flagMedicamentos], [6]).
+template([medicamentos, para, s(_), '?'], [flagMedicamentos], [2]).
+template([tratamiento, farmacologico, para, s(_), '?'], [flagMedicamentos], [3]).
 
 
 template([tengo, los, siguientes, sintomas, s(_), s(_), y, s(_), '.'], [flagMultiSintomas], [4, 5, 7]).
@@ -379,6 +401,21 @@ respuesta_region(Enfermedad, R) :-
 	    R = 'No tengo informacion sobre las regiones donde es comun esa condicion.'
 	).
 
+respuesta_medicamentos(Enfermedad, R) :-
+    atom_string(AtomEnfermedad, Enfermedad),
+    (   enfermedad(AtomEnfermedad),
+        findall(M, tratado_con(AtomEnfermedad, M), Medicamentos),
+        Medicamentos \= [],
+        atomics_to_string(Medicamentos, ', ', MedicamentosStr),
+        string_concat('Los medicamentos comúnmente utilizados para ', Enfermedad, Temp1),
+        string_concat(Temp1, ' son: ', Temp2),
+        string_concat(Temp2, MedicamentosStr, Temp3),
+        string_concat(Temp3, '. Recuerde que estos medicamentos deben ser prescritos por un médico.', Resp),
+        string_to_atom(Resp, R)
+    ;   
+        R = 'No tengo información sobre medicamentos para esa condición o la condición no está en mi base de datos.'
+    ).
+
 count_matching_symptoms(_, [], 0).
 count_matching_symptoms(Enfermedad, [Sintoma|Resto], Total) :-
     has_symptom(Enfermedad, Sintoma, si),
@@ -469,7 +506,6 @@ replace0([I|Index], Input, N, Resp, R):-
 	replace0(Index, Input, N1, R1, R),!.
 
 
-% INTEGRACIÓN CON EL SISTEMA DE REEMPLAZO
 replace0([I|_], Input, _, Resp, R):- 
     nth0(I, Input, Persona),
     nth0(0, Resp, X),
@@ -537,6 +573,12 @@ replace0([I1, I2|_], Input, _, Resp, R):-
     X == flagEsPadre,
     respuesta_es_padre(Padre, Hijo, R).
 
+replace0([I|_], Input, _, Resp, R):- 
+    nth0(I, Input, Enfermedad),
+    nth0(0, Resp, X),
+    X == flagMedicamentos,
+    respuesta_medicamentos(Enfermedad, R).
+    
 replace0([I1, I2|_], Input, _, Resp, R):- 
     nth0(I1, Input, Madre),
     nth0(I2, Input, Hijo),
@@ -576,7 +618,6 @@ match([S|Stim],[_|Input]) :-
 	\+atom(S),
 	match(Stim, Input),!.
 
-% RESPUESTAS PARA CONSULTAS FAMILIARES
 respuesta_padre(Hijo, R) :-
     atom_string(AtomHijo, Hijo),
     (   persona(AtomHijo),
