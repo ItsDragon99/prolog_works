@@ -11,6 +11,18 @@ procesar(Input):- Input == ['adios'],
 procesar(Input):- Input == ['adios', '.'],
 	writeln('Gracias por consultar. Recuerda que esto no reemplaza la visita a un medico. !Hasta luego!'), !.
 
+% Fix game command recognition
+procesar(Input) :-
+	(Input == ['jugar', 'adivinar', 'personaje'] ; 
+	 Input == ['jugar', 'adivinar', 'personajes'] ;
+	 Input == ['juego', 'personajes'] ;
+	 Input == ['juego', 'rick', 'and', 'morty'] ;
+	 Input == ['juego', 'rick', 'y', 'morty'] ;
+	 Input == ['adivina', 'mi', 'personaje'] ;
+	 Input == ['adivina', 'quien', 'soy']),
+	writeln('Iniciando juego de adivinar personajes de Rick and Morty...'),
+	iniciar_adivinanza, !.
+
 % aqui deberia de evaluar la interaccon del uusuario
 procesar(Input) :-
 	template(Patron, Respuesta, IndPatron),
@@ -159,7 +171,7 @@ tratado_con(bocio, metimazol).
 tratado_con(bocio, propiltiouracilo).
 tratado_con(bocio, beta_bloqueantes).
 
-persona(juan).
+persona(\n).
 persona(maria).
 persona(pedro).
 persona(ana).
@@ -245,6 +257,542 @@ puede_afectar(Enfermedad, Genero) :-
 	afecta_a_genero(Enfermedad, Genero).
 
 
+personaje_rm(rick_sanchez).
+personaje_rm(morty_smith).
+personaje_rm(summer_smith).
+personaje_rm(beth_smith).
+personaje_rm(jerry_smith).
+personaje_rm(supernova).
+personaje_rm(million_ants).
+personaje_rm(crocubot).
+personaje_rm(mr_goldenfold).
+personaje_rm(principal_vagina).
+personaje_rm(abuelita_smith).
+personaje_rm(birdperson).
+personaje_rm(squanchy).
+personaje_rm(krombopulos_michael).
+personaje_rm(tammy_guetermann).
+personaje_rm(gazorpazorpfield).
+personaje_rm(reina_gazorpiana).
+personaje_rm(zeep_xanflorp).
+personaje_rm(habitante_random).
+personaje_rm(abradolf_lincler).
+personaje_rm(meeseeks).
+personaje_rm(robo_butler).
+personaje_rm(unity_drone).
+personaje_rm(gearhead).
+personaje_rm(robo_asesino).
+personaje_rm(cyber_morty).
+personaje_rm(evil_morty).
+personaje_rm(morty_cyborg).
+personaje_rm(morty_doofus).
+personaje_rm(rick_primer_ministro).
+personaje_rm(rick_robot).
+personaje_rm(rick_simple).
+personaje_rm(pickle_rick).
+personaje_rm(toxic_rick).
+personaje_rm(toxic_morty).
+
+especie(rick_sanchez, humano).
+especie(morty_smith, humano).
+especie(summer_smith, humano).
+especie(beth_smith, humano).
+especie(jerry_smith, humano).
+especie(supernova, humano).
+especie(million_ants, alien).
+especie(crocubot, hibrido).
+especie(mr_goldenfold, humano).
+especie(principal_vagina, humano).
+especie(abuelita_smith, humano).
+especie(birdperson, alien).
+especie(squanchy, alien).
+especie(krombopulos_michael, alien).
+especie(tammy_guetermann, humano).
+especie(gazorpazorpfield, alien).
+especie(reina_gazorpiana, alien).
+especie(zeep_xanflorp, alien).
+especie(habitante_random, alien).
+especie(abradolf_lincler, experimento).
+especie(meeseeks, entidad).
+especie(robo_butler, robot).
+especie(unity_drone, robot).
+especie(gearhead, alien).
+especie(robo_asesino, robot).
+especie(cyber_morty, robot).
+especie(evil_morty, humano_alternativo).
+especie(morty_cyborg, hibrido).
+especie(morty_doofus, humano_alternativo).
+especie(rick_primer_ministro, humano_alternativo).
+especie(rick_robot, robot).
+especie(rick_simple, humano_alternativo).
+especie(pickle_rick, transformacion).
+especie(toxic_rick, entidad).
+especie(toxic_morty, entidad).
+
+grupo(rick_sanchez, familia_sanchez).
+grupo(morty_smith, familia_sanchez).
+grupo(summer_smith, familia_sanchez).
+grupo(beth_smith, familia_sanchez).
+grupo(jerry_smith, familia_sanchez).
+grupo(supernova, vindicators).
+grupo(million_ants, vindicators).
+grupo(crocubot, vindicators).
+grupo(mr_goldenfold, ciudadanos_tierra).
+grupo(principal_vagina, ciudadanos_tierra).
+grupo(abuelita_smith, familia_sanchez).
+grupo(birdperson, federacion_galactica).
+grupo(squanchy, resistencia).
+grupo(krombopulos_michael, asesinos).
+grupo(tammy_guetermann, federacion_galactica).
+grupo(gazorpazorpfield, planeta_gazorpazorp).
+grupo(reina_gazorpiana, planeta_gazorpazorp).
+grupo(zeep_xanflorp, microverso).
+grupo(habitante_random, microverso).
+grupo(abradolf_lincler, creaciones_rick).
+grupo(meeseeks, creaciones_rick).
+grupo(robo_butler, creaciones_rick).
+grupo(unity_drone, controlados_unity).
+grupo(gearhead, robots_independientes).
+grupo(robo_asesino, exterminadores).
+grupo(cyber_morty, robots_independientes).
+grupo(evil_morty, citadel).
+grupo(morty_cyborg, citadel).
+grupo(morty_doofus, citadel).
+grupo(rick_primer_ministro, consejo_ricks).
+grupo(rick_robot, robots_independientes).
+grupo(rick_simple, citadel).
+grupo(pickle_rick, realidades_extranas).
+grupo(toxic_rick, realidades_extranas).
+grupo(toxic_morty, realidades_extranas).
+
+rol(rick_sanchez, cientifico).
+rol(morty_smith, estudiante).
+rol(summer_smith, estudiante).
+rol(beth_smith, cirujana).
+rol(jerry_smith, desempleado).
+rol(supernova, superheroe).
+rol(million_ants, superheroe).
+rol(crocubot, superheroe).
+rol(mr_goldenfold, profesor).
+rol(principal_vagina, director).
+rol(abuelita_smith, abuela).
+rol(birdperson, guerrero).
+rol(squanchy, guerrero).
+rol(krombopulos_michael, asesino).
+rol(tammy_guetermann, agente).
+rol(gazorpazorpfield, mascota).
+rol(reina_gazorpiana, gobernante).
+rol(zeep_xanflorp, cientifico).
+rol(habitante_random, esclavo).
+rol(abradolf_lincler, experimento).
+rol(meeseeks, ayudante).
+rol(robo_butler, sirviente).
+rol(unity_drone, sirviente).
+rol(gearhead, mecanico).
+rol(robo_asesino, exterminador).
+rol(cyber_morty, mejorado).
+rol(evil_morty, presidente).
+rol(morty_cyborg, modificado).
+rol(morty_doofus, tonto).
+rol(rick_primer_ministro, lider).
+rol(rick_robot, inteligencia_artificial).
+rol(rick_simple, normal).
+rol(pickle_rick, pepino).
+rol(toxic_rick, malvado).
+rol(toxic_morty, malvado).
+
+caracteristica(rick_sanchez, alcoholico).
+caracteristica(morty_smith, nervioso).
+caracteristica(summer_smith, aventurera).
+caracteristica(beth_smith, alcoholica).
+caracteristica(jerry_smith, inseguro).
+caracteristica(supernova, manipuladora).
+caracteristica(million_ants, colonia).
+caracteristica(crocubot, mitad_cocodrilo).
+caracteristica(mr_goldenfold, adicto_suenos).
+caracteristica(principal_vagina, estricto).
+caracteristica(abuelita_smith, amorosa).
+caracteristica(birdperson, sabio).
+caracteristica(squanchy, adicto).
+caracteristica(krombopulos_michael, profesional).
+caracteristica(tammy_guetermann, traidora).
+caracteristica(gazorpazorpfield, odia_lunes).
+caracteristica(reina_gazorpiana, dominante).
+caracteristica(zeep_xanflorp, inteligente).
+caracteristica(habitante_random, ignorante).
+caracteristica(abradolf_lincler, confundido).
+caracteristica(meeseeks, existencia_dolorosa).
+caracteristica(robo_butler, educado).
+caracteristica(unity_drone, controlado).
+caracteristica(gearhead, aficionado_engranajes).
+caracteristica(robo_asesino, programado_matar).
+caracteristica(cyber_morty, cyborg).
+caracteristica(evil_morty, calculador).
+caracteristica(morty_cyborg, mejorado).
+caracteristica(morty_doofus, ingenuo).
+caracteristica(rick_primer_ministro, burocrata).
+caracteristica(rick_robot, mecanico).
+caracteristica(rick_simple, ordinario).
+caracteristica(pickle_rick, pepinillo).
+caracteristica(toxic_rick, parte_oscura).
+caracteristica(toxic_morty, inseguridades).
+
+relacion(rick_sanchez, morty_smith, abuelo).
+relacion(rick_sanchez, summer_smith, abuelo).
+relacion(rick_sanchez, beth_smith, padre).
+relacion(morty_smith, summer_smith, hermano).
+relacion(morty_smith, beth_smith, hijo).
+relacion(morty_smith, jerry_smith, hijo).
+relacion(summer_smith, beth_smith, hija).
+relacion(summer_smith, jerry_smith, hija).
+relacion(beth_smith, jerry_smith, esposa).
+relacion(morty_smith, abuelita_smith, nieto).
+
+
+
+:- dynamic personaje_adivinado/1.
+
+iniciar_adivinanza :-
+    retractall(personaje_adivinado(_)),
+    writeln('¡Vamos a jugar a adivinar personajes de Rick and Morty!'),
+    writeln('Piensa en un personaje y yo lo adivinaré.'),
+    writeln('Responde a mis preguntas con si, no o no_se.'),
+    preguntar_especie.
+
+preguntar_especie :-
+    writeln('¿Tu personaje es humano?'),
+    readln(Input),
+    procesar_respuesta(Input, especie, humano).
+
+preguntar_alien :-
+    writeln('¿Tu personaje es un alien?'),
+    readln(Input),
+    procesar_respuesta(Input, especie, alien).
+
+preguntar_robot :-
+    writeln('¿Tu personaje es un robot o tiene partes robóticas?'),
+    readln(Input),
+    procesar_respuesta(Input, especie, robot).
+
+preguntar_familia :-
+    writeln('¿Tu personaje es parte de la familia Smith-Sanchez?'),
+    readln(Input),
+    procesar_respuesta(Input, grupo, familia_sanchez).
+
+preguntar_cientifico :-
+    writeln('¿Tu personaje es un científico?'),
+    readln(Input),
+    procesar_respuesta(Input, rol, cientifico).
+
+preguntar_estudiante :-
+    writeln('¿Tu personaje es un estudiante?'),
+    readln(Input),
+    procesar_respuesta(Input, rol, estudiante).
+
+preguntar_rick :-
+    writeln('¿Tu personaje es una versión de Rick?'),
+    readln(Input),
+    (Input = [si] -> 
+        candidatos_rick;
+    Input = [no] ->
+        preguntar_morty;
+    preguntar_morty).
+
+preguntar_morty :-
+    writeln('¿Tu personaje es una versión de Morty?'),
+    readln(Input),
+    (Input = [si] -> 
+        candidatos_morty;
+    Input = [no] ->
+        preguntar_caracteristica;
+    preguntar_caracteristica).
+
+preguntar_caracteristica :-
+    writeln('¿Tu personaje tiene alguna habilidad especial o superpoder?'),
+    readln(Input),
+    (Input = [si] -> 
+        candidatos_poderes;
+    Input = [no] ->
+        candidatos_normales;
+    candidatos_finales).
+
+candidatos_rick :-
+    writeln('¿Tu personaje es la versión original de Rick (C-137)?'),
+    readln(Input),
+    (Input = [si] -> 
+        concluir(rick_sanchez);
+    Input = [no] ->
+        writeln('¿Tu personaje es un pepinillo?'),
+        readln(Input2),
+        (Input2 = [si] -> 
+            concluir(pickle_rick);
+        adivinar_rick));
+    adivinar_rick.
+
+adivinar_rick :-
+    findall(P, (personaje_rm(P), rol(P, cientifico)), Cientificos),
+    length(Cientificos, L),
+    (L =:= 1 -> 
+        [Unico|_] = Cientificos,
+        concluir(Unico);
+    L =:= 0 ->
+        writeln('No logro identificar a tu personaje. ¿Quién es?'),
+        readln([Nombre|_]),
+        writeln(['Oh, era ', Nombre, '. ¡Aprendí algo nuevo!']),
+        writeln('¿Jugamos otra vez?');
+    writeln('Podría ser Rick Simple, Rick Robot, Rick Primer Ministro o Toxic Rick.'),
+    writeln('¿Es malvado tu personaje?'),
+    readln(Input),
+    (Input = [si] -> 
+        concluir(toxic_rick);
+    writeln('¿Es un robot?'),
+    readln(Input2),
+    (Input2 = [si] -> 
+        concluir(rick_robot);
+    writeln('¿Tiene un cargo político?'),
+    readln(Input3),
+    (Input3 = [si] -> 
+        concluir(rick_primer_ministro);
+    concluir(rick_simple))))).
+
+candidatos_morty :-
+    writeln('¿Tu personaje es malvado?'),
+    readln(Input),
+    (Input = [si] -> 
+        writeln('¿Es el presidente de la Ciudadela?'),
+        readln(Input2),
+        (Input2 = [si] -> 
+            concluir(evil_morty);
+        concluir(toxic_morty));
+    writeln('¿Tu personaje tiene partes robóticas?'),
+    readln(Input3),
+    (Input3 = [si] -> 
+        concluir(morty_cyborg);
+    writeln('¿Tu personaje es notablemente tonto?'),
+    readln(Input4),
+    (Input4 = [si] -> 
+        concluir(morty_doofus);
+    concluir(morty_smith)))).
+
+candidatos_poderes :-
+    writeln('¿Tu personaje es parte de los Vindicators?'),
+    readln(Input),
+    (Input = [si] -> 
+        writeln('¿Tu personaje está hecho de hormigas?'),
+        readln(Input2),
+        (Input2 = [si] -> 
+            concluir(million_ants);
+        writeln('¿Tu personaje es mitad cocodrilo?'),
+        readln(Input3),
+        (Input3 = [si] -> 
+            concluir(crocubot);
+        concluir(supernova)));
+    writeln('¿Tu personaje es del espacio?'),
+    readln(Input4),
+    (Input4 = [si] -> 
+        candidatos_aliens;
+    candidatos_otros_poderes)).
+
+candidatos_aliens :-
+    writeln('¿Tu personaje tiene plumas o características de ave?'),
+    readln(Input),
+    (Input = [si] -> 
+        concluir(birdperson);
+    writeln('¿Tu personaje dice "squanch" frecuentemente?'),
+    readln(Input2),
+    (Input2 = [si] -> 
+        concluir(squanchy);
+    writeln('¿Tu personaje es un asesino profesional?'),
+    readln(Input3),
+    (Input3 = [si] -> 
+        concluir(krombopulos_michael);
+    writeln('¿Tu personaje tiene partes mecánicas?'),
+    readln(Input4),
+    (Input4 = [si] -> 
+        concluir(gearhead);
+    candidatos_finales)))).
+
+candidatos_otros_poderes :-
+    writeln('¿Tu personaje fue creado por Rick?'),
+    readln(Input),
+    (Input = [si] -> 
+        writeln('¿Tu personaje es azul y aparece cuando alguien pide ayuda?'),
+        readln(Input2),
+        (Input2 = [si] -> 
+            concluir(meeseeks);
+        concluir(abradolf_lincler));
+    candidatos_finales).
+
+candidatos_normales :-
+    writeln('¿Tu personaje es de la familia Smith?'),
+    readln(Input),
+    (Input = [si] -> 
+        writeln('¿Tu personaje es uno de los padres?'),
+        readln(Input2),
+        (Input2 = [si] -> 
+            writeln('¿Es la madre/Beth?'),
+            readln(Input3),
+            (Input3 = [si] -> 
+                concluir(beth_smith);
+            concluir(jerry_smith));
+        writeln('¿Es la hermana/Summer?'),
+        readln(Input4),
+        (Input4 = [si] -> 
+            concluir(summer_smith);
+        writeln('¿Es la abuela?'),
+        readln(Input5),
+        (Input5 = [si] -> 
+            concluir(abuelita_smith);
+        concluir(morty_smith))));
+    candidatos_secundarios).
+
+candidatos_secundarios :-
+    writeln('¿Tu personaje trabaja en la escuela?'),
+    readln(Input),
+    (Input = [si] -> 
+        writeln('¿Es el director?'),
+        readln(Input2),
+        (Input2 = [si] -> 
+            concluir(principal_vagina);
+        concluir(mr_goldenfold));
+    writeln('¿Tu personaje resultó ser un agente encubierto?'),
+    readln(Input3),
+    (Input3 = [si] -> 
+        concluir(tammy_guetermann);
+    candidatos_finales)).
+
+candidatos_finales :-
+    writeln('Estoy teniendo problemas para adivinar...'),
+    writeln('¿Tu personaje es del microverso (la batería de Rick)?'),
+    readln(Input),
+    (Input = [si] -> 
+        writeln('¿Es un científico?'),
+        readln(Input2),
+        (Input2 = [si] -> 
+            concluir(zeep_xanflorp);
+        concluir(habitante_random));
+    writeln('¿Tu personaje es un robot o máquina?'),
+    readln(Input3),
+    (Input3 = [si] -> 
+        writeln('¿Está diseñado para matar?'),
+        readln(Input4),
+        (Input4 = [si] -> 
+            concluir(robo_asesino);
+        concluir(robo_butler));
+    writeln('¿Tu personaje es de Gazorpazorp?'),
+    readln(Input5),
+    (Input5 = [si] -> 
+        writeln('¿Es la reina?'),
+        readln(Input6),
+        (Input6 = [si] -> 
+            concluir(reina_gazorpiana);
+        concluir(gazorpazorpfield));
+    writeln('No logro identificar a tu personaje. ¿Quién es?'),
+    readln([Nombre|_]),
+    writeln(['Oh, era ', Nombre, '. ¡Aprendí algo nuevo!']),
+    writeln('¿Jugamos otra vez?')))).
+
+procesar_respuesta([si], especie, humano) :- 
+    preguntar_familia.
+procesar_respuesta([no], especie, humano) :- 
+    preguntar_alien.
+procesar_respuesta([no_se], especie, humano) :- 
+    preguntar_alien.
+
+procesar_respuesta([si], especie, alien) :- 
+    candidatos_aliens.
+procesar_respuesta([no], especie, alien) :- 
+    preguntar_robot.
+procesar_respuesta([no_se], especie, alien) :- 
+    preguntar_robot.
+
+procesar_respuesta([si], especie, robot) :- 
+    writeln('¿Tu personaje fue creado por Rick?'),
+    readln(Input),
+    (Input = [si] -> 
+        candidatos_robots_rick;
+    candidatos_otros_robots).
+procesar_respuesta([no], especie, robot) :- 
+    preguntar_cientifico.
+procesar_respuesta([no_se], especie, robot) :- 
+    preguntar_cientifico.
+
+procesar_respuesta([si], grupo, familia_sanchez) :- 
+    preguntar_rick.
+procesar_respuesta([no], grupo, familia_sanchez) :- 
+    preguntar_caracteristica.
+procesar_respuesta([no_se], grupo, familia_sanchez) :- 
+    preguntar_caracteristica.
+
+procesar_respuesta([si], rol, cientifico) :- 
+    preguntar_rick.
+procesar_respuesta([no], rol, cientifico) :- 
+    preguntar_estudiante.
+procesar_respuesta([no_se], rol, cientifico) :- 
+    preguntar_estudiante.
+
+procesar_respuesta([si], rol, estudiante) :- 
+    writeln('¿Tu personaje es el hermano menor (Morty)?'),
+    readln(Input),
+    (Input = [si] -> 
+        concluir(morty_smith);
+    concluir(summer_smith)).
+procesar_respuesta([no], rol, estudiante) :- 
+    candidatos_finales.
+procesar_respuesta([no_se], rol, estudiante) :- 
+    candidatos_finales.
+
+candidatos_robots_rick :-
+    writeln('¿Tu personaje es azul y aparece cuando alguien pide un deseo?'),
+    readln(Input),
+    (Input = [si] -> 
+        concluir(meeseeks);
+    writeln('¿Tu personaje es un mayordomo?'),
+    readln(Input2),
+    (Input2 = [si] -> 
+        concluir(robo_butler);
+    candidatos_finales)).
+
+candidatos_otros_robots :-
+    writeln('¿Tu personaje está programado para matar?'),
+    readln(Input),
+    (Input = [si] -> 
+        concluir(robo_asesino);
+    writeln('¿Tu personaje tiene partes de Morty?'),
+    readln(Input2),
+    (Input2 = [si] -> 
+        concluir(morty_cyborg);
+    writeln('¿Tu personaje está controlado por Unity?'),
+    readln(Input3),
+    (Input3 = [si] -> 
+        concluir(unity_drone);
+    candidatos_finales))).
+
+concluir(Personaje) :-
+    atom_string(Personaje, PersonajeStr),
+    string_concat('¡Ya sé! Tu personaje es ', PersonajeStr, Temp),
+    string_concat(Temp, '.', Resp),
+    writeln(Resp),
+    writeln('¿Acerté? (si/no)'),
+    readln(Input),
+    (Input = [si] ->
+        writeln('¡Excelente! Me encanta este juego. ¿Quieres jugar de nuevo? (si/no)'),
+        readln(Input2),
+        (Input2 = [si] ->
+            iniciar_adivinanza;
+        writeln('De acuerdo. ¡Hasta la próxima!'));
+    writeln('Oh, me equivoqué. ¿Quién era tu personaje?'),
+    readln([Nombre|_]),
+    string_concat('Recordaré que ', Nombre, Temp2),
+    string_concat(Temp2, ' tiene esas características para la próxima vez.', Resp2),
+    writeln(Resp2),
+    writeln('¿Quieres jugar de nuevo? (si/no)'),
+    readln(Input3),
+    (Input3 = [si] ->
+        iniciar_adivinanza;
+    writeln('De acuerdo. ¡Hasta la próxima!'))).
+
+
 template([tengo, s(_), '.'], [flagSintoma], [1]).
 template([presento, s(_), '.'], [flagSintoma], [1]).
 template([me, duele, s(_), '.'], [flagSintoma], [2]).
@@ -303,6 +851,14 @@ template([s(_), y, s(_), son, hermanos, '?'], [flagSonHermanos], [0, 2]).
 template([de, quien, es, s(_), padre, '?'], [flagDePadre], [3]).
 template([de, quien, es, s(_), madre, '?'], [flagDeMadre], [3]).
 
+
+template([jugar, adivinar, personaje], [flagJuego], []).
+template([jugar, adivinar, personajes], [flagJuego], []).
+template([juego, personajes], [flagJuego], []).
+template([juego, rick, and, morty], [flagJuego], []).
+template([juego, rick, y, morty], [flagJuego], []).
+template([adivina, mi, personaje], [flagJuego], []).
+template([adivina, quien, soy], [flagJuego], []).
 
 
 
@@ -605,6 +1161,10 @@ replace0([I|_], Input, _, Resp, R):-
     X == flagDeMadre,
     respuesta_de_madre(Madre, R).
 
+replace0([_|_], _, _, Resp, 'Iniciando juego de adivinar personajes de Rick and Morty...'):- 
+    nth0(0, Resp, X),
+    X == flagJuego, !,
+    iniciar_adivinanza.
 
 match([],[]).
 match([], _):- true.
